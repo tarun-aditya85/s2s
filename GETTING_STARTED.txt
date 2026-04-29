@@ -1,0 +1,181 @@
+================================================================================
+  S2S ATTRIBUTION SERVER - GETTING STARTED
+================================================================================
+
+🎯 PROJECT SUMMARY
+------------------
+A production-ready, privacy-first Server-to-Server (S2S) attribution platform
+for B2B SaaS and Finance clients. Tracks clicks and conversions with sub-5ms
+latency, multi-tenant isolation, and executive dashboards (CTO, CFO, CMO).
+
+📦 WHAT'S INCLUDED
+------------------
+✓ TypeScript/Express server with Redis caching
+✓ Multi-tenant authentication & data isolation
+✓ Real-time event streaming (GCP Pub/Sub or AWS Kinesis)
+✓ Parquet data pipeline for efficient analytics
+✓ BigQuery/Athena warehouse with authorized views
+✓ Terraform infrastructure for GCP & AWS
+✓ Executive dashboard SQL queries (CTO/CFO/CMO metrics)
+✓ Automated deployment scripts
+✓ Unit & integration tests
+✓ Comprehensive documentation
+
+🚀 QUICK START (5 MINUTES)
+---------------------------
+1. Install dependencies:
+   npm install
+
+2. Start local Redis:
+   docker run -d -p 6379:6379 redis:7-alpine
+
+3. Configure environment:
+   cp .env.example .env
+
+4. Start server:
+   npm run dev
+
+5. Test endpoints:
+   curl http://localhost:8080/health
+
+📚 KEY DOCUMENTS
+----------------
+README.md                    → Project overview & features
+docs/QUICK_START.md          → 10-minute setup guide
+docs/ARCHITECTURE.md         → System design & data flow
+docs/DEPLOYMENT.md           → Production deployment (GCP/AWS)
+docs/DASHBOARD_METRICS.md    → Executive metrics SQL queries
+PROJECT_STRUCTURE.md         → File organization explained
+
+🔧 CORE TECHNOLOGIES
+--------------------
+• Node.js 18 + TypeScript
+• Express.js (REST API)
+• Redis (click_id cache with 90-day TTL)
+• GCP: Cloud Run, Pub/Sub, BigQuery, Memorystore
+• AWS: ECS Fargate, Kinesis, Athena, ElastiCache
+• Terraform (Infrastructure as Code)
+• Parquet (columnar storage format)
+
+⚡ PERFORMANCE TARGETS
+----------------------
+• Redirect latency: <5ms (P99)
+• Postback latency: <10ms (P99)
+• Attribution accuracy: >95%
+• System uptime: 99.95%
+• Throughput: 10K+ RPS per instance
+
+🎯 USE CASES
+------------
+1. Affiliate Marketing: Track referral clicks & commissions
+2. Ad Attribution: Measure campaign ROI across channels
+3. Conversion Tracking: Server-side tracking (immune to ad blockers)
+4. Multi-Touch Attribution: Assign credit to touchpoints
+
+🛠️ DEPLOYMENT OPTIONS
+----------------------
+Local Development:
+  npm run dev
+
+GCP (Automated):
+  export GCP_PROJECT_ID="your-project"
+  ./scripts/deploy-gcp.sh
+
+GCP (Manual):
+  cd infra/terraform/gcp
+  terraform apply -var="project_id=your-project"
+
+AWS (Manual):
+  cd infra/terraform/aws
+  terraform apply -var="region=us-east-1"
+
+📊 EXECUTIVE METRICS
+--------------------
+CTO Metrics:
+  • System uptime (99.95% SLA)
+  • P99 redirect latency (<5ms)
+  • Mean Time to Recovery (MTTR)
+  • Attribution accuracy (>95%)
+
+CFO Metrics:
+  • ROI per campaign
+  • Payout integrity (fraud detection)
+  • CAC vs LTV cohorts
+
+CMO Metrics:
+  • Multi-touch attribution weights
+  • Conversion rate by device/geo
+  • Funnel velocity (time-to-conversion)
+
+📁 PROJECT STRUCTURE
+--------------------
+src/                      → Application code (TypeScript)
+  ├── routes/            → API endpoints (/click, /postback)
+  ├── services/          → Redis, event streaming
+  ├── middleware/        → Authentication, rate limiting
+  └── utils/             → Device parsing, geo-location
+
+infra/                    → Infrastructure as Code
+  ├── terraform/gcp/     → Cloud Run, Pub/Sub, BigQuery
+  ├── terraform/aws/     → ECS, Kinesis, S3, Athena
+  └── bigquery/          → Schema, views, materialized views
+
+scripts/                  → Automation
+  ├── deploy-gcp.sh      → One-click GCP deployment
+  ├── setup-tenant.sh    → Add new client
+  └── generate-test-data.sh → Sample data generator
+
+docs/                     → Documentation
+tests/                    → Unit & integration tests
+
+🔐 SECURITY FEATURES
+--------------------
+✓ API key authentication (sk_live_*, sk_test_*)
+✓ Multi-tenant data isolation (Redis, BigQuery, Storage)
+✓ TLS encryption everywhere
+✓ IP address anonymization (GDPR)
+✓ Fraud prevention (duplicate postback detection)
+✓ Rate limiting (1000 req/min per IP)
+
+💰 COST ESTIMATES (GCP @ 10K RPS)
+----------------------------------
+Cloud Run (2 vCPU, 512MB):  $80/month
+Memorystore Redis (5GB):    $150/month
+Pub/Sub:                    $40/month
+Cloud Storage:              $10/month
+BigQuery:                   $20/month
+--------------------------------------------
+TOTAL:                      ~$300/month
+
+🧪 TESTING
+----------
+Run all tests:
+  npm test
+
+Unit tests only:
+  npm run test:unit
+
+Generate test data:
+  ./scripts/generate-test-data.sh 100
+
+📞 SUPPORT
+----------
+GitHub Issues: https://github.com/your-org/s2s-attribution-server/issues
+Documentation: docs/
+Email: support@yourcompany.com
+
+📄 LICENSE
+----------
+MIT License - Free for commercial use
+
+================================================================================
+  NEXT STEPS
+================================================================================
+
+1. Read docs/QUICK_START.md for local setup
+2. Review docs/ARCHITECTURE.md to understand the system
+3. Deploy to GCP with ./scripts/deploy-gcp.sh
+4. Add your first tenant with ./scripts/setup-tenant.sh
+5. Query metrics in BigQuery using docs/DASHBOARD_METRICS.md
+
+Happy tracking! 🎉
